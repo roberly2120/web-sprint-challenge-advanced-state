@@ -27,13 +27,13 @@ export function setQuiz(quiz) {
  }
 
 export function inputChangeQuestion(input) {
-  return {type: INPUT_CHANGE_QUESTION, payload: input}
+  return {type: INPUT_CHANGE_QUESTION, payload: input.trim()}
  }
 export function inputChangeTrue(input) {
-  return {type: INPUT_CHANGE_TRUE, payload: input}
+  return {type: INPUT_CHANGE_TRUE, payload: input.trim()}
  }
 export function inputChangeFalse(input) {
-  return {type: INPUT_CHANGE_FALSE, payload: input}
+  return {type: INPUT_CHANGE_FALSE, payload: input.trim()}
  }
 export function resetForm() {
   return {type: RESET_FORM}
@@ -50,11 +50,10 @@ export function fetchQuiz() {
 }
 export function postAnswer(quiz_id, answer_id) {
   return function (dispatch) {
-    dispatch(selectAnswer(null))
     axios.post('http://localhost:9000/api/quiz/answer', { "quiz_id": quiz_id, "answer_id": answer_id })
     .then(res => dispatch(setMessage(res.data.message)))
     .catch(err => dispatch(setMessage("Sorry, something went wrong")))
-    dispatch(fetchQuiz())
+    dispatch(setQuiz(null))
   }
 }
 export function postQuiz(question, trueAnswer, falseAnswer) {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
 
@@ -6,6 +6,8 @@ export function Form(props) {
   const question = props.form.newQuestion
   const trueAnswer = props.form.newTrueAnswer
   const falseAnswer = props.form.newFalseAnswer
+  const disabled = useState(true)
+
 
   const onChangeQuestion = evt => {
     props.inputChangeQuestion(evt.target.value)

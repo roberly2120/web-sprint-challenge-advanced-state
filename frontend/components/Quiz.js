@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 function Quiz(props) {
 useEffect(() => {
   if(!props.quiz){
+    console.log('fetching');
   props.fetchQuiz()
   }
 })

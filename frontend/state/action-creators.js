@@ -51,9 +51,12 @@ export function fetchQuiz() {
 export function postAnswer(quiz_id, answer_id) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/quiz/answer', { "quiz_id": quiz_id, "answer_id": answer_id })
-    .then(res => dispatch(setMessage(res.data.message)))
+    .then(res => {
+      dispatch(setMessage(res.data.message))
+      dispatch(setQuiz(null))
+    })
     .catch(err => dispatch(setMessage("Sorry, something went wrong")))
-    dispatch(setQuiz(null))
+    
   }
 }
 export function postQuiz(question, trueAnswer, falseAnswer) {
